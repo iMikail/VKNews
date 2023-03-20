@@ -13,6 +13,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
-        networkService.getFeed()
+        networkService.request(path: API.newsFeed, parameters: ["filters": "post,photo"]) { data, error in
+        }
     }
 }

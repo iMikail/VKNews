@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
         window = UIWindow(windowScene: windowScene)
         authService = AuthService()
         authService?.delegate = self
-        let authVC = UIStoryboard(name: "AuthViewController", bundle: nil).instantiateInitialViewController()
+        let authVC = UIStoryboard(name: String(describing: AuthViewController.self),
+                                  bundle: nil).instantiateInitialViewController()
                     as? AuthViewController
         window?.rootViewController = authVC
         window?.makeKeyAndVisible()
@@ -47,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
 
     func authServiceSignIn() {
         guard
-            let feedVC = UIStoryboard(name: "FeedViewController",
+            let feedVC = UIStoryboard(name: String(describing: FeedViewController.self),
                                       bundle: nil).instantiateInitialViewController() as? FeedViewController else
             { return }
         let navVC = UINavigationController(rootViewController: feedVC)
