@@ -18,6 +18,8 @@
 		A8F2005929C850BF00A30D88 /* AuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */; };
 		A8F2005B29C85FB300A30D88 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F2005A29C85FB300A30D88 /* FeedViewController.swift */; };
 		A8F2005D29C85FDB00A30D88 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F2005C29C85FDB00A30D88 /* FeedViewController.storyboard */; };
+		A8F2006129C883B200A30D88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F2006029C883B200A30D88 /* NetworkService.swift */; };
+		A8F2006329C884F600A30D88 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F2006229C884F600A30D88 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +49,8 @@
 		A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthViewController.storyboard; sourceTree = "<group>"; };
 		A8F2005A29C85FB300A30D88 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A8F2005C29C85FDB00A30D88 /* FeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
+		A8F2006029C883B200A30D88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A8F2006229C884F600A30D88 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				A8F2004D29C846A700A30D88 /* AuthService.swift */,
+				A8F2006029C883B200A30D88 /* NetworkService.swift */,
+				A8F2006229C884F600A30D88 /* API.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,7 +252,9 @@
 				A8D27C2B29C8387D0000C11B /* AppDelegate.swift in Sources */,
 				A8F2005B29C85FB300A30D88 /* FeedViewController.swift in Sources */,
 				A8D27C2D29C8387D0000C11B /* SceneDelegate.swift in Sources */,
+				A8F2006129C883B200A30D88 /* NetworkService.swift in Sources */,
 				A8F2004E29C846A700A30D88 /* AuthService.swift in Sources */,
+				A8F2006329C884F600A30D88 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
