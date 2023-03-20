@@ -25,7 +25,6 @@ final class NetworkService: Networking {
         allParameters["access_token"] = token
         allParameters["v"] = API.version
         if let url = self.url(from: path, parameters: allParameters) {
-            print(url)//-
             let request = URLRequest(url: url)
             let task = createDataTask(from: request, completion: completion)
             task.resume()
