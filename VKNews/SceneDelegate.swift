@@ -8,9 +8,16 @@
 import UIKit
 import VKSdkFramework
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
     var window: UIWindow?
     var authService: AuthService?
+
+    static func shared() -> SceneDelegate {
+        let scene = UIApplication.shared.connectedScenes.first
+        let sceneDelegate: SceneDelegate = (scene?.delegate as? SceneDelegate) ?? SceneDelegate()
+
+        return sceneDelegate
+    }
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -19,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
         authService = AuthService()
+        authService?.delegate = self
         let authVC = UIStoryboard(name: "AuthViewController", bundle: nil).instantiateInitialViewController()
                     as? AuthViewController
         window?.rootViewController = authVC
@@ -29,5 +37,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url {
             VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
         }
+    }
+
+    // MARK: - AuthServiceDelegate
+    func authServiceShouldShow(viewController: UIViewController) {
+        print(#function)
+        window?.rootViewController?.present(viewController, animated: true)
+    }
+
+    func authServiceSignIn() {
+        guard
+            let feedVC = UIStoryboard(name: "FeedViewController",
+                                      bundle: nil).instantiateInitialViewController() as? FeedViewController else
+            { return }
+        let navVC = UINavigationController(rootViewController: feedVC)
+        window?.rootViewController = navVC
+        print(#function)
+    }
+
+    func authServiceSignInDidFail() {
+        print(#function)
     }
 }

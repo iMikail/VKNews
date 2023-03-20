@@ -16,6 +16,8 @@
 		A8F2005529C84D4200A30D88 /* VKSdkFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F2005429C84D4100A30D88 /* VKSdkFramework.xcframework */; };
 		A8F2005629C84D4200A30D88 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8F2005429C84D4100A30D88 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8F2005929C850BF00A30D88 /* AuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */; };
+		A8F2005B29C85FB300A30D88 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F2005A29C85FB300A30D88 /* FeedViewController.swift */; };
+		A8F2005D29C85FDB00A30D88 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8F2005C29C85FDB00A30D88 /* FeedViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,8 @@
 		A8F2004D29C846A700A30D88 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A8F2005429C84D4100A30D88 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthViewController.storyboard; sourceTree = "<group>"; };
+		A8F2005A29C85FB300A30D88 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		A8F2005C29C85FDB00A30D88 /* FeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +83,8 @@
 			children = (
 				A8D27C2A29C8387D0000C11B /* AppDelegate.swift */,
 				A8D27C2C29C8387D0000C11B /* SceneDelegate.swift */,
-				A8D27C2E29C8387D0000C11B /* AuthViewController.swift */,
-				A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */,
+				A8F2005F29C8603900A30D88 /* AuthViewController */,
+				A8F2005E29C8602700A30D88 /* FeedViewController */,
 				A8F2004F29C846AC00A30D88 /* Services */,
 				A8D27C3329C838800000C11B /* Assets.xcassets */,
 				A8D27C3529C838800000C11B /* LaunchScreen.storyboard */,
@@ -103,6 +107,24 @@
 				A8F2004D29C846A700A30D88 /* AuthService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A8F2005E29C8602700A30D88 /* FeedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A8F2005A29C85FB300A30D88 /* FeedViewController.swift */,
+				A8F2005C29C85FDB00A30D88 /* FeedViewController.storyboard */,
+			);
+			path = FeedViewController;
+			sourceTree = "<group>";
+		};
+		A8F2005F29C8603900A30D88 /* AuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A8D27C2E29C8387D0000C11B /* AuthViewController.swift */,
+				A8F2005829C850BF00A30D88 /* AuthViewController.storyboard */,
+			);
+			path = AuthViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +191,7 @@
 				A8D27C3729C838800000C11B /* LaunchScreen.storyboard in Resources */,
 				A8F2005929C850BF00A30D88 /* AuthViewController.storyboard in Resources */,
 				A8D27C3429C838800000C11B /* Assets.xcassets in Resources */,
+				A8F2005D29C85FDB00A30D88 /* FeedViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +244,7 @@
 			files = (
 				A8D27C2F29C8387D0000C11B /* AuthViewController.swift in Sources */,
 				A8D27C2B29C8387D0000C11B /* AppDelegate.swift in Sources */,
+				A8F2005B29C85FB300A30D88 /* FeedViewController.swift in Sources */,
 				A8D27C2D29C8387D0000C11B /* SceneDelegate.swift in Sources */,
 				A8F2004E29C846A700A30D88 /* AuthService.swift in Sources */,
 			);
