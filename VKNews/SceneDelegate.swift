@@ -48,8 +48,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
 
     func authServiceSignIn() {
         guard
-            let feedVC = UIStoryboard(name: String(describing: FeedViewController.self),
-                                      bundle: nil).instantiateInitialViewController() as? FeedViewController else
+            let feedVC = UIStoryboard(name: String(describing: NewsFeedViewController.self),
+                                      bundle: nil).instantiateInitialViewController() as? NewsFeedViewController else
             { return }
         let navVC = UINavigationController(rootViewController: feedVC)
         window?.rootViewController = navVC
