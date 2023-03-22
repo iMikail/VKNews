@@ -41,6 +41,10 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
         interactor?.makeRequest(request: .getNewsFeed)
+
+        table.separatorStyle = .none
+        table.backgroundColor = .clear
+        view.backgroundColor = .systemIndigo
     }
 
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
