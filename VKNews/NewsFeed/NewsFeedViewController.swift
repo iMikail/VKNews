@@ -12,7 +12,6 @@ protocol NewsFeedDisplayLogic: AnyObject {
 }
 
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
-    let cellIdentifier = "cell"
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
 
@@ -37,7 +36,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
+                       forCellReuseIdentifier: NewsFeedCell.reuseId)
     }
 
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
@@ -48,12 +48,18 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension NewsFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         interactor?.makeRequest(request: .getFeed)
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        212
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension NewsFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         5
@@ -61,10 +67,9 @@ extension NewsFeedViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
-                                                     for: indexPath) as? UITableViewCell else
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId,
+                                                     for: indexPath) as? NewsFeedCell else
             { return UITableViewCell() }
-        cell.textLabel?.text = "index: \(indexPath.row)"
 
         return cell
     }
