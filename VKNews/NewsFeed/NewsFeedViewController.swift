@@ -15,6 +15,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
 
+    private var feedViewModel = FeedViewModel(cells: [])
+
     @IBOutlet weak var table: UITableView!
 
     // MARK: Object lifecycle
@@ -38,22 +40,20 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setup()
         table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
+        interactor?.makeRequest(request: .getNewsFeed)
     }
 
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .displayNewsFeed:
-            print("selected row")
+        case .displayNewsFeed(let feedViewModel):
+            self.feedViewModel = feedViewModel
+            table.reloadData()
         }
     }
 }
 
 // MARK: - UITableViewDelegate
 extension NewsFeedViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        interactor?.makeRequest(request: .getFeed)
-    }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         212
     }
@@ -62,14 +62,17 @@ extension NewsFeedViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension NewsFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        feedViewModel.cells.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId,
-                                                     for: indexPath) as? NewsFeedCell else
-            { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId,
+                                                       for: indexPath) as? NewsFeedCell else {
+            return UITableViewCell()
+        }
+
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.set(viewModel: cellViewModel)
 
         return cell
     }
