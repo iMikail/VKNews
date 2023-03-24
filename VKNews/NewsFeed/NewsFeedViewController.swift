@@ -40,6 +40,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setup()
         table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
+        table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
         interactor?.makeRequest(request: .getNewsFeed)
 
         table.separatorStyle = .none
@@ -72,14 +73,20 @@ extension NewsFeedViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId,
-                                                       for: indexPath) as? NewsFeedCell else {
+        // with Xib
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId,
+//                                                       for: indexPath) as? NewsFeedCell else {
+//            return UITableViewCell()
+//        }
+
+        // with Code
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId,
+                                                       for: indexPath) as? NewsFeedCodeCell else {
             return UITableViewCell()
         }
 
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
-
         return cell
     }
 }
