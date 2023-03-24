@@ -13,7 +13,7 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         authService = SceneDelegate.shared().authService
-        view.backgroundColor = .green
+        view.backgroundColor = .systemIndigo
     }
 
     @IBAction func signInTouch(_ sender: UIButton) {
