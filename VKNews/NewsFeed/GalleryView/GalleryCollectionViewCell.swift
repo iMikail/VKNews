@@ -15,16 +15,14 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     lazy var myImageView: WebImageView = {
         let imageView = WebImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .cyan//-
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        backgroundColor = .green//-
         setupViews()
         setupConstraints()
     }
@@ -32,6 +30,15 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     override func prepareForReuse() {
         myImageView.image = nil
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        myImageView.layer.masksToBounds = true
+        myImageView.layer.cornerRadius = 10
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 2.5, height: 4)
     }
 
     func set(imageUrl: String?) {
