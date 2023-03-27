@@ -8,6 +8,7 @@
 import UIKit
 
 final class NewsFeedCell: UITableViewCell {
+    // MARK: - Constants/variables
     static let reuseId = "NewsFeedCell"
 
     // MARK: - Views
@@ -26,6 +27,7 @@ final class NewsFeedCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
 
+    // MARK: - Functions
     override func prepareForReuse() {
         iconImageView.set(imageUrl: nil)
         postImageView.set(imageUrl: nil)
@@ -57,7 +59,7 @@ final class NewsFeedCell: UITableViewCell {
         postImageView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
 
-        if let photoAttachment = viewModel.photoAttachment {
+        if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)
             postImageView.isHidden = false
         } else {

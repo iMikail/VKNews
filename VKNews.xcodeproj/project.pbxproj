@@ -17,6 +17,8 @@
 		A83B51DA29C8A42200AD104E /* NewsFeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B51D329C8A42200AD104E /* NewsFeedModels.swift */; };
 		A83B51DB29C8A42200AD104E /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B51D429C8A42200AD104E /* NewsFeedViewController.swift */; };
 		A83B51DC29C8A42200AD104E /* NewsFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B51D529C8A42200AD104E /* NewsFeedInteractor.swift */; };
+		A84F2DF729D1BD4C00953B92 /* GalleryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84F2DF629D1BD4C00953B92 /* GalleryCollectionView.swift */; };
+		A84F2DF929D1BE8200953B92 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84F2DF829D1BE8200953B92 /* GalleryCollectionViewCell.swift */; };
 		A876860029CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87685FF29CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift */; };
 		A876860229CD868D00C470C5 /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = A876860129CD868D00C470C5 /* String + Height.swift */; };
 		A876860429CDCB4900C470C5 /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A876860329CDCB4900C470C5 /* NewsFeedCodeCell.swift */; };
@@ -62,6 +64,8 @@
 		A83B51D329C8A42200AD104E /* NewsFeedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedModels.swift; sourceTree = "<group>"; };
 		A83B51D429C8A42200AD104E /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 		A83B51D529C8A42200AD104E /* NewsFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedInteractor.swift; sourceTree = "<group>"; };
+		A84F2DF629D1BD4C00953B92 /* GalleryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionView.swift; sourceTree = "<group>"; };
+		A84F2DF829D1BE8200953B92 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A87685FF29CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellLayoutCalculator.swift; sourceTree = "<group>"; };
 		A876860129CD868D00C470C5 /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 		A876860329CDCB4900C470C5 /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 		A83B51CF29C8A3AF00AD104E /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				A84F2DF529D1BD3200953B92 /* GalleryView */,
 				A8C4A6AA29CAF04300698962 /* Cell */,
 				A8C4A6A829CAE08100698962 /* NewsFeedViewController.storyboard */,
 				A83B51D429C8A42200AD104E /* NewsFeedViewController.swift */,
@@ -125,6 +130,15 @@
 				A8C4A6AB29CAF05700698962 /* NewsFeedCell.swift */,
 			);
 			path = "With Xib";
+			sourceTree = "<group>";
+		};
+		A84F2DF529D1BD3200953B92 /* GalleryView */ = {
+			isa = PBXGroup;
+			children = (
+				A84F2DF829D1BE8200953B92 /* GalleryCollectionViewCell.swift */,
+				A84F2DF629D1BD4C00953B92 /* GalleryCollectionView.swift */,
+			);
+			path = GalleryView;
 			sourceTree = "<group>";
 		};
 		A8C4A6AA29CAF04300698962 /* Cell */ = {
@@ -330,6 +344,7 @@
 				A876860229CD868D00C470C5 /* String + Height.swift in Sources */,
 				A876860429CDCB4900C470C5 /* NewsFeedCodeCell.swift in Sources */,
 				A83B51D729C8A42200AD104E /* NewsFeedPresenter.swift in Sources */,
+				A84F2DF929D1BE8200953B92 /* GalleryCollectionViewCell.swift in Sources */,
 				A8D27C2F29C8387D0000C11B /* AuthViewController.swift in Sources */,
 				A8D27C2B29C8387D0000C11B /* AppDelegate.swift in Sources */,
 				A83B51DC29C8A42200AD104E /* NewsFeedInteractor.swift in Sources */,
@@ -345,6 +360,7 @@
 				A8F2006329C884F600A30D88 /* API.swift in Sources */,
 				A83B51DA29C8A42200AD104E /* NewsFeedModels.swift in Sources */,
 				A8C4A6AC29CAF05700698962 /* NewsFeedCell.swift in Sources */,
+				A84F2DF729D1BD4C00953B92 /* GalleryCollectionView.swift in Sources */,
 				A83B51DB29C8A42200AD104E /* NewsFeedViewController.swift in Sources */,
 				A876860029CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift in Sources */,
 			);
