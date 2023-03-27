@@ -7,8 +7,41 @@
 
 import UIKit
 
+protocol NewsFeedCodeCellDelegate: AnyObject {
+    func revealPost(for cell: NewsFeedCodeCell)
+}
+
+protocol FeedCellViewModel {
+    var iconUrlImage: String { get }
+    var name: String { get }
+    var date: String { get }
+    var text: String? { get }
+    var likes: String? { get }
+    var comments: String? { get }
+    var shares: String? { get }
+    var views: String? { get }
+    var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+    var sizes: FeedCellSizes { get }
+}
+
+protocol FeedCellPhotoAttachmentViewModel {
+    var photoUrlString: String? { get }
+    var width: Int { get }
+    var height: Int { get }
+}
+
+protocol FeedCellSizes {
+    var postLabelFrame: CGRect { get }
+    var attachmentFrame: CGRect { get }
+    var bottomViewFrame: CGRect { get }
+    var totalHeigt: CGFloat { get }
+    var noreTextButtonFrame: CGRect { get }
+}
+
 final class NewsFeedCodeCell: UITableViewCell {
     static let reuseId = "NewsFeedCodeCell"
+
+    weak var delegate: NewsFeedCodeCellDelegate?
 
     // MARK: - Views
     // MARK: First Layer
@@ -28,6 +61,16 @@ final class NewsFeedCodeCell: UITableViewCell {
         label.font = Constants.CellSize.postLabelFont
 
         return label
+    }()
+    lazy var moreTextButtom: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(.systemIndigo, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Показать полностью...", for: .normal)
+
+        return button
     }()
     lazy var postImageView: WebImageView = {
         let imageView = WebImageView()
@@ -85,6 +128,10 @@ final class NewsFeedCodeCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
+        iconImageView.layer.cornerRadius = Constants.CellSize.topViewHeight / 2
+        iconImageView.clipsToBounds = true
+        moreTextButtom.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
+
         cardView.layer.cornerRadius = 10
         cardView.clipsToBounds = true
         setupViews()
@@ -101,6 +148,10 @@ final class NewsFeedCodeCell: UITableViewCell {
         postImageView.set(imageUrl: nil)
     }
 
+    @objc private func moreTextButtonTouch() {
+        delegate?.revealPost(for: self)
+    }
+
     func set(viewModel: FeedCellViewModel) {
         iconImageView.set(imageUrl: viewModel.iconUrlImage)
         nameLabel.text = viewModel.name
@@ -113,6 +164,7 @@ final class NewsFeedCodeCell: UITableViewCell {
 
         postLabel.frame = viewModel.sizes.postLabelFrame
         postImageView.frame = viewModel.sizes.attachmentFrame
+        moreTextButtom.frame = viewModel.sizes.noreTextButtonFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
 
         if let photoAttachment = viewModel.photoAttachment {
@@ -130,6 +182,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         // second Layer
         cardView.addSubview(topView)
         cardView.addSubview(postLabel)
+        cardView.addSubview(moreTextButtom)
         cardView.addSubview(postImageView)
         cardView.addSubview(bottomView)
         // third Layer

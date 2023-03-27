@@ -7,32 +7,6 @@
 
 import UIKit
 
-protocol FeedCellViewModel {
-    var iconUrlImage: String { get }
-    var name: String { get }
-    var date: String { get }
-    var text: String? { get }
-    var likes: String? { get }
-    var comments: String? { get }
-    var shares: String? { get }
-    var views: String? { get }
-    var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
-    var sizes: FeedCellSizes { get }
-}
-
-protocol FeedCellPhotoAttachmentViewModel {
-    var photoUrlString: String? { get }
-    var width: Int { get }
-    var height: Int { get }
-}
-
-protocol FeedCellSizes {
-    var postLabelFrame: CGRect { get }
-    var attachmentFrame: CGRect { get }
-    var bottomViewFrame: CGRect { get }
-    var totalHeigt: CGFloat { get }
-}
-
 final class NewsFeedCell: UITableViewCell {
     static let reuseId = "NewsFeedCell"
 
@@ -56,6 +30,7 @@ final class NewsFeedCell: UITableViewCell {
         iconImageView.set(imageUrl: nil)
         postImageView.set(imageUrl: nil)
     }
+
     override func awakeFromNib() {
         super.awakeFromNib()
 

@@ -22,8 +22,13 @@ struct Constants {
 
         static let bottomSubViewHeight: CGFloat = 44
         static let bottomSubViewWidth: CGFloat = 80
-
         static let bottomSubViewIconSize: CGFloat = 24
+
+        static let minifiedPostLimintLines: CGFloat = 8
+        static let minifiedPostLines: CGFloat = 6
+
+        static let moreTextButtonSize = CGSize(width: 170, height: 30)
+        static let moreTextButtonInsets = UIEdgeInsets(top: 0, left: defaultSpace, bottom: 0, right: defaultSpace)
     }
 
     enum ImageKey: String {

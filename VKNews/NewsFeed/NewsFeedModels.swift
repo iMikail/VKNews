@@ -14,12 +14,13 @@ enum NewsFeed {
         struct Request {
             enum RequestType {
                 case getNewsFeed
+                case revealPostIds(_ postId: Int)
             }
         }
 
         struct Response {
             enum ResponseType {
-                case presentNewsFeed(_ feed: FeedResponse)
+                case presentNewsFeed(_ feed: FeedResponse, revealedPostIds: [Int])
             }
         }
 
@@ -33,6 +34,8 @@ enum NewsFeed {
 // swiftlint:enable nesting
 struct FeedViewModel {
     struct Cell: FeedCellViewModel {
+        var postId: Int
+
         var iconUrlImage: String
         var name: String
         var date: String

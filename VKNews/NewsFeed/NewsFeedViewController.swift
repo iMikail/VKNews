@@ -64,6 +64,12 @@ extension NewsFeedViewController: UITableViewDelegate {
 
         return cellViewModel.sizes.totalHeigt
     }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+
+        return cellViewModel.sizes.totalHeigt
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -86,7 +92,20 @@ extension NewsFeedViewController: UITableViewDataSource {
         }
 
         let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.delegate = self
         cell.set(viewModel: cellViewModel)
+
         return cell
+    }
+}
+
+// MARK: - NewsFeedCodeCellDelegate
+extension NewsFeedViewController: NewsFeedCodeCellDelegate {
+    func revealPost(for cell: NewsFeedCodeCell) {
+        guard let indexPath = table.indexPath(for: cell) else { return }
+
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+
+        interactor?.makeRequest(request: .revealPostIds(cellViewModel.postId))
     }
 }

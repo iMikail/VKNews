@@ -118,13 +118,21 @@
 			path = NewsFeed;
 			sourceTree = "<group>";
 		};
-		A8C4A6AA29CAF04300698962 /* Cell */ = {
+		A84F2DF429D17A6500953B92 /* With Xib */ = {
 			isa = PBXGroup;
 			children = (
 				A8C4A6AD29CAF0B900698962 /* NewsFeedCell.xib */,
 				A8C4A6AB29CAF05700698962 /* NewsFeedCell.swift */,
-				A87685FF29CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift */,
+			);
+			path = "With Xib";
+			sourceTree = "<group>";
+		};
+		A8C4A6AA29CAF04300698962 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A84F2DF429D17A6500953B92 /* With Xib */,
 				A876860329CDCB4900C470C5 /* NewsFeedCodeCell.swift */,
+				A87685FF29CD755D00C470C5 /* NewsFeedCellLayoutCalculator.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

@@ -25,8 +25,11 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
 
     func presentData(response: NewsFeed.Model.Response.ResponseType) {
         switch response {
-        case .presentNewsFeed(let feed):
-            let cells = feed.items.map { createCellViewModel(from: $0, profiles: feed.profiles, groups: feed.groups) }
+        case .presentNewsFeed(let feed, let revealedPostIds):
+            let cells = feed.items.map { createCellViewModel(from: $0,
+                                                             profiles: feed.profiles,
+                                                             groups: feed.groups,
+                                                             revealedPostIds: revealedPostIds) }
             let feedViewModel = FeedViewModel(cells: cells)
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel))
         }
@@ -34,14 +37,21 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
 
     private func createCellViewModel(from feedItem: FeedItem,
                                      profiles: [Profile],
-                                     groups: [Group]) -> FeedViewModel.Cell {
+                                     groups: [Group],
+                                     revealedPostIds: [Int]) -> FeedViewModel.Cell {
         let profile = createProfile(forSourceId: feedItem.sourceId, profiles: profiles, groups: groups)
         let photoAttachment = createPhotoAttachment(feedItem: feedItem)
         let date = Date(timeIntervalSince1970: feedItem.date)
         let dateTitle = dateFormatter.string(from: date)
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, photoAttachment: photoAttachment)
 
-        return FeedViewModel.Cell(iconUrlImage: profile.photo,
+        let isFullSized = revealedPostIds.contains(feedItem.postId)
+
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text,
+                                               photoAttachment: photoAttachment,
+                                               isFullSizedPost: isFullSized)
+
+        return FeedViewModel.Cell(postId: feedItem.postId,
+                                  iconUrlImage: profile.photo,
                                   name: profile.name,
                                   date: dateTitle,
                                   text: feedItem.text,
