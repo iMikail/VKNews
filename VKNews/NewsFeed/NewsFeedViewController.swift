@@ -21,20 +21,21 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     // MARK: - Views
     @IBOutlet weak var table: UITableView!
     private lazy var titleView = TitleView()
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+
+        return refreshControl
+    }()
 
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVIPcycle()
         setupTopBar()
+        setupTable()
 
         view.backgroundColor = .systemIndigo
-        table.separatorStyle = .none
-        table.backgroundColor = .clear
-
-        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
-                       forCellReuseIdentifier: NewsFeedCell.reuseId)
-        table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
 
         interactor?.makeRequest(request: .getNewsFeed)
         interactor?.makeRequest(request: .getUser)
@@ -46,15 +47,31 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .displayNewsFeed(let feedViewModel):
             self.feedViewModel = feedViewModel
             table.reloadData()
+            refreshControl.endRefreshing()
         case .displayUser(let userViewModel):
             titleView.set(userViewModel: userViewModel)
         }
+    }
+
+    @objc private func refresh() {
+        interactor?.makeRequest(request: .getNewsFeed)
     }
 
     private func setupTopBar() {
         navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.titleView = titleView
+    }
+
+    private func setupTable() {
+        let topInset: CGFloat = 8
+        table.contentInset.top = topInset
+        table.separatorStyle = .none
+        table.backgroundColor = .clear
+        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
+                       forCellReuseIdentifier: NewsFeedCell.reuseId)
+        table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
+        table.addSubview(refreshControl)
     }
 
     private func setupVIPcycle() {
