@@ -53,6 +53,13 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         }
     }
 
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height * 0.9 {
+            print("scrolled 90%")
+            interactor?.makeRequest(request: .getNextBatch)
+        }
+    }
+
     @objc private func refresh() {
         interactor?.makeRequest(request: .getNewsFeed)
     }
