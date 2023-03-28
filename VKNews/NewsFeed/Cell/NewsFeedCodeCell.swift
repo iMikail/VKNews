@@ -57,12 +57,20 @@ final class NewsFeedCodeCell: UITableViewCell {
 
     // MARK: Second Layer
     private lazy var topView = createView()
-    private lazy var postLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = Constants.CellSize.postLabelFont
+    private lazy var postLabel: UITextView = {
+        let textView = UITextView()
+        textView.font = Constants.CellSize.postLabelFont
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
 
-        return label
+        textView.dataDetectorTypes = UIDataDetectorTypes.all
+        // отступы как у лейбла
+        let padding = textView.textContainer.lineFragmentPadding
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -padding, bottom: 0, right: -padding)
+
+        return textView
     }()
     private lazy var moreTextButtom: UIButton = {
         let button = UIButton()
