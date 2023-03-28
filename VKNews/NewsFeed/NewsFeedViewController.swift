@@ -95,8 +95,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         table.contentInset.top = topInset
         table.separatorStyle = .none
         table.backgroundColor = .clear
-        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
-                       forCellReuseIdentifier: NewsFeedCell.reuseId)
+
         table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
         table.addSubview(refreshControl)
         table.tableFooterView = footerView
