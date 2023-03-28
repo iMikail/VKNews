@@ -16,11 +16,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
 
-    private var feedViewModel = FeedViewModel(cells: [])
+    private var feedViewModel = FeedViewModel(cells: [], footerTitle: nil)
 
     // MARK: - Views
     @IBOutlet weak var table: UITableView!
     private lazy var titleView = TitleView()
+    private lazy var footerView = FooterView()
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -48,14 +49,17 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             self.feedViewModel = feedViewModel
             table.reloadData()
             refreshControl.endRefreshing()
+            footerView.setTitle(feedViewModel.footerTitle)
         case .displayUser(let userViewModel):
             titleView.set(userViewModel: userViewModel)
+        case .displayFooterLoader:
+            footerView.showLoader()
         }
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView.contentOffset.y > scrollView.contentSize.height * 0.9 {
-            print("scrolled 90%")
+        if scrollView.contentOffset.y > scrollView.contentSize.height * 0.95 {
+            print("scrolled 95%")
             interactor?.makeRequest(request: .getNextBatch)
         }
     }
@@ -79,6 +83,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
                        forCellReuseIdentifier: NewsFeedCell.reuseId)
         table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
         table.addSubview(refreshControl)
+        table.tableFooterView = footerView
     }
 
     private func setupVIPcycle() {
