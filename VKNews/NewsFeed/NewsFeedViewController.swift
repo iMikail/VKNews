@@ -12,16 +12,52 @@ protocol NewsFeedDisplayLogic: AnyObject {
 }
 
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
+    // MARK: - Constants/variables
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
 
     private var feedViewModel = FeedViewModel(cells: [])
 
+    // MARK: - Views
     @IBOutlet weak var table: UITableView!
+    private lazy var titleView = TitleView()
 
-    // MARK: Object lifecycle
-    // MARK: Setup
-    private func setup() {
+    // MARK: View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupVIPcycle()
+        setupTopBar()
+
+        view.backgroundColor = .systemIndigo
+        table.separatorStyle = .none
+        table.backgroundColor = .clear
+
+        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
+                       forCellReuseIdentifier: NewsFeedCell.reuseId)
+        table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
+
+        interactor?.makeRequest(request: .getNewsFeed)
+        interactor?.makeRequest(request: .getUser)
+    }
+
+    // MARK: - Functions
+    func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
+        switch viewModel {
+        case .displayNewsFeed(let feedViewModel):
+            self.feedViewModel = feedViewModel
+            table.reloadData()
+        case .displayUser(let userViewModel):
+            titleView.set(userViewModel: userViewModel)
+        }
+    }
+
+    private func setupTopBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.titleView = titleView
+    }
+
+    private func setupVIPcycle() {
         let viewController        = self
         let interactor            = NewsFeedInteractor()
         let presenter             = NewsFeedPresenter()
@@ -31,29 +67,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
-    }
-
-    // MARK: Routing
-    // MARK: View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        table.register(UINib(nibName: NewsFeedCell.reuseId, bundle: nil),
-                       forCellReuseIdentifier: NewsFeedCell.reuseId)
-        table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
-        interactor?.makeRequest(request: .getNewsFeed)
-
-        table.separatorStyle = .none
-        table.backgroundColor = .clear
-        view.backgroundColor = .systemIndigo
-    }
-
-    func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
-        switch viewModel {
-        case .displayNewsFeed(let feedViewModel):
-            self.feedViewModel = feedViewModel
-            table.reloadData()
-        }
     }
 }
 

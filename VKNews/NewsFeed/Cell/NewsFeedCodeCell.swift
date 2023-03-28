@@ -47,7 +47,7 @@ final class NewsFeedCodeCell: UITableViewCell {
 
     // MARK: - Views
     // MARK: First Layer
-    lazy var cardView: UIView = {
+    private lazy var cardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -56,15 +56,15 @@ final class NewsFeedCodeCell: UITableViewCell {
     }()
 
     // MARK: Second Layer
-    lazy var topView = createView()
-    lazy var postLabel: UILabel = {
+    private lazy var topView = createView()
+    private lazy var postLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = Constants.CellSize.postLabelFont
 
         return label
     }()
-    lazy var moreTextButtom: UIButton = {
+    private lazy var moreTextButtom: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.setTitleColor(.systemIndigo, for: .normal)
@@ -74,23 +74,23 @@ final class NewsFeedCodeCell: UITableViewCell {
 
         return button
     }()
-    lazy var galleryCollectionView = GalleryCollectionView()
-    lazy var postImageView: WebImageView = {
+    private lazy var galleryCollectionView = GalleryCollectionView()
+    private lazy var postImageView: WebImageView = {
         let imageView = WebImageView()
 
         return imageView
     }()
-    lazy var bottomView = UIView()
+    private lazy var bottomView = UIView()
 
     // MARK: Third Layer
     // TopViews
-    lazy var iconImageView: WebImageView = {
+    private lazy var iconImageView: WebImageView = {
         let imageView = WebImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         return imageView
     }()
-    lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -99,7 +99,7 @@ final class NewsFeedCodeCell: UITableViewCell {
 
         return label
     }()
-    lazy var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
@@ -109,20 +109,20 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     // Bottom views
-    lazy var likesView = createView()
-    lazy var commentsView = createView()
-    lazy var sharesView = createView()
-    lazy var viewsView = createView()
+    private lazy var likesView = createView()
+    private lazy var commentsView = createView()
+    private lazy var sharesView = createView()
+    private lazy var viewsView = createView()
 
     // MARK: Fourth Layer
-    lazy var likesImageView = createImageView(image: Constants.ImageKey.like.rawValue)
-    lazy var likesLabel = createLabel()
-    lazy var commentsImageView = createImageView(image: Constants.ImageKey.comment.rawValue)
-    lazy var commentsLabel = createLabel()
-    lazy var sharesImageView = createImageView(image: Constants.ImageKey.share.rawValue)
-    lazy var sharesLabel = createLabel()
-    lazy var viewsImageView = createImageView(image: Constants.ImageKey.eye.rawValue)
-    lazy var viewsLabel = createLabel()
+    private lazy var likesImageView = createImageView(image: Constants.ImageKey.like.rawValue)
+    private lazy var likesLabel = createLabel()
+    private lazy var commentsImageView = createImageView(image: Constants.ImageKey.comment.rawValue)
+    private lazy var commentsLabel = createLabel()
+    private lazy var sharesImageView = createImageView(image: Constants.ImageKey.share.rawValue)
+    private lazy var sharesLabel = createLabel()
+    private lazy var viewsImageView = createImageView(image: Constants.ImageKey.eye.rawValue)
+    private lazy var viewsLabel = createLabel()
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

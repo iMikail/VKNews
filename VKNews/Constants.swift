@@ -36,5 +36,6 @@ struct Constants {
         case comment
         case share
         case eye
+        case search
     }
 }
